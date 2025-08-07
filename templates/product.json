@@ -1,10 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "sport-event-product": {
       "type": "sport-event-product",
-    },
+      "blocks": {
+        "product_name_mjU98W": {
+          "type": "product_name",
+          "settings": {}
+        },
+        "description_myyDAT": {
+          "type": "description",
+          "settings": {}
+        },
+        "price_Hwwe9y": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_zkifEL": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "form_8G8rat": {
+          "type": "form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_name_mjU98W",
+        "description_myyDAT",
+        "price_Hwwe9y",
+        "variant_picker_zkifEL",
+        "form_8G8rat"
+      ],
+      "settings": {
+        "image_position": "left"
+      }
+    }
   },
   "order": [
-    "sport-event-product",
+    "sport-event-product"
   ]
 }
