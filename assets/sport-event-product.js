@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let variantId = variantSelector.value;
 
+  //for some reason, srcset interferes picture changing
+  image.removeAttribute('srcset');
+
   variantSelector.addEventListener('change', function () {
     variantId = variantSelector.value;
     const selectedOption = variantSelector.querySelector(`[value='${variantId}']`);
