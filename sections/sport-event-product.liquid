@@ -14,47 +14,104 @@
   </div>
   <div class="sport-product-right">
     <div class="sport-product-form">
-      <h1 class="product-title">{{ product.title }}</h1>
-      <div class="product-description">
-        {{ product.description }}
-      </div>
-      <p class="product-price" id="variantPrice">
-        {{ product.variants.first.price | money }}
-      </p>
-      <label for="variantSelector">Choose variant:</label>
-      <select class="variant-selector" id="variantSelector">
-        {% for variant in product.variants %}
-          <option
-            value="{{ variant.id }}"
-            data-price="{{ variant.price | money }}"
-            data-image="{{ variant.featured_image | image_url: width: 800 }}"
-          >
-            {{ variant.title }}
-          </option>
-        {% endfor %}
-      </select>
-      <form id="customForm" class="customer-data-form">
-        <label>Name* <input type="text" name="first_name" required></label>
-        <label>Surname* <input type="text" name="last_name" required></label>
-        <label>Email* <input type="email" name="email" required></label>
-        <label>Phone* <input type="tel" name="phone" required></label>
-        <label>Postcode* <input type="text" name="postal_code" required></label>
-        <label>Date-of-birth* <input type="date" name="dob" required></label>
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'product_name' %}
+            <h1 class="product-title">{{ product.title }}</h1>
+          {% when 'description' %}
+            <div class="product-description">
+              {{ product.description }}
+            </div>
+          {% when 'price' %}
+            <p class="product-price" id="variantPrice">
+              {{ product.variants.first.price | money }}
+            </p>
+          {% when 'variant_picker' %}
+            <label for="variantSelector">Choose variant:</label>
+            <select class="variant-selector" id="variantSelector">
+              {% for variant in product.variants %}
+                <option
+                  value="{{ variant.id }}"
+                  data-price="{{ variant.price | money }}"
+                  data-image="{{ variant.featured_image | image_url: width: 800 }}"
+                >
+                  {{ variant.title }}
+                </option>
+              {% endfor %}
+            </select>
+          {% when 'form' %}
+            <form id="customForm" class="customer-data-form">
+              <label>Name* <input type="text" name="first_name" required></label>
+              <label>Surname* <input type="text" name="last_name" required></label>
+              <label>Email* <input type="email" name="email" required></label>
+              <label>Phone* <input type="tel" name="phone" required></label>
+              <label>Postcode* <input type="text" name="postal_code" required></label>
+              <label>Date-of-birth* <input type="date" name="dob" required></label>
 
-        <label
-          >Gender*
-          <select name="gender" required>
-            <option value="" selected disabled>Choose</option>
-            <option value="male">Man</option>
-            <option value="female">Woman</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
+              <label
+                >Gender*
+                <select name="gender" required>
+                  <option value="" selected disabled>Choose</option>
+                  <option value="male">Man</option>
+                  <option value="female">Woman</option>
+                  <option value="other">Other</option>
+                </select>
+              </label>
 
-        <label>User code <input type="text" name="user_code"></label>
-      </form>
+              <label>User code <input type="text" name="user_code"></label>
+            </form>
+        {% endcase %}
+      {% endfor %}
 
       <button type="submit" class="submit-button" id="submitButton">Checkout</button>
     </div>
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Sport Event",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "On which side picture will be displayed",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_name",
+      "name": "Product name"
+    },
+    {
+      "type": "description",
+      "name": "Description"
+    },
+    {
+      "type": "price",
+      "name": "Price"
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker"
+    },
+    {
+      "type": "form",
+      "name": "Form"
+    }
+  ],
+  "max_blocks": 5
+}
+{% endschema %}
