@@ -1,0 +1,60 @@
+{{ 'sport-event-product.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'sport-event-product.js' | asset_url }}" defer></script>
+
+<div
+  class="sport-product-wrapper"
+  {% if section.settings.image_position == 'right' %}
+    style="flex-direction: row-reverse;"
+  {% endif %}
+>
+  <div class="sport-product-left">
+    {% assign variant_image = product.variants.first.featured_image | default: product.featured_image %}
+    {{ variant_image | image_url: width: 800 | image_tag: id: 'variantImage' }}
+  </div>
+  <div class="sport-product-right">
+    <div class="sport-product-form">
+      <h1 class="product-title">{{ product.title }}</h1>
+      <div class="product-description">
+        {{ product.description }}
+      </div>
+      <p class="product-price" id="variantPrice">
+        {{ product.variants.first.price | money }}
+      </p>
+      <label for="variantSelector">Choose variant:</label>
+      <select class="variant-selector" id="variantSelector">
+        {% for variant in product.variants %}
+          <option
+            value="{{ variant.id }}"
+            data-price="{{ variant.price | money }}"
+            data-image="{{ variant.featured_image | image_url: width: 800 }}"
+          >
+            {{ variant.title }}
+          </option>
+        {% endfor %}
+      </select>
+      <form id="customForm" class="customer-data-form">
+        <label>Name* <input type="text" name="first_name" required></label>
+        <label>Surname* <input type="text" name="last_name" required></label>
+        <label>Email* <input type="email" name="email" required></label>
+        <label>Phone* <input type="tel" name="phone" required></label>
+        <label>Postcode* <input type="text" name="postal_code" required></label>
+        <label>Date-of-birth* <input type="date" name="dob" required></label>
+
+        <label
+          >Gender*
+          <select name="gender" required>
+            <option value="" selected disabled>Choose</option>
+            <option value="male">Man</option>
+            <option value="female">Woman</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+
+        <label>User code <input type="text" name="user_code"></label>
+      </form>
+
+      <button type="submit" class="submit-button" id="submitButton">Checkout</button>
+    </div>
+  </div>
+</div>
