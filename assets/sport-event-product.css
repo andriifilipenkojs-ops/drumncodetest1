@@ -88,3 +88,27 @@
 .submit-button:hover {
   background-color: #005fa3;
 }
+
+@media (max-width: 768px) {
+  .sport-product-wrapper {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .sport-product-left,
+  .sport-product-right {
+    flex: 1 1 100%;
+  }
+
+  .product-title {
+    font-size: 1.6rem;
+  }
+
+  .product-price {
+    font-size: 1.3rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+  }
+}
